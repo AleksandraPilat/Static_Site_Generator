@@ -1,14 +1,17 @@
-from textnode import TextNode
+import shutil
 
+def copy_directory(src: str, dst: str):
+    try:
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+        print(f"Copied contents of '{src}' → '{dst}'")
+    except FileNotFoundError:
+        print(f"Source directory '{src}' not found.")
+    except IOError as e:
+        print(f"Error writing to destination '{dst}': {e}")
 
 def main():
-    node = TextNode()
-    node.text = "Hello, World!"
-    node.text_type = "bold"
-    node.url = "http://example.com"
-
-    print(node)
-
+    copy_directory("/Users/alekdandrapilat/BbootdevProjects/static_site_generator/static",
+                   "/Users/alekdandrapilat/BbootdevProjects/static_site_generator/public")
 
 if __name__ == "__main__":
     main()
